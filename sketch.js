@@ -27,16 +27,11 @@ function setup() {
 	groundSprite=createSprite(width/2, height-35, width,10);
 	groundSprite.shapeColor=color(255)
 
-	if(keyDown("down")){
-		packageBody.isStatic(false);
-		packageBody.velocityY=1.5;
-	}
 
 	engine = Engine.create();
 	world = engine.world;
 
-	
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:1, isStatic:false});
+	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:3, isStatic:true});
 	World.add(world, packageBody);
 	
 
@@ -53,15 +48,17 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   background(0);
-  packageSprite.x= packageBody.position.x;
-  packageSprite.y= packageBody.position.y;
+  packageSprite.x= packageBody.position.x 
+  packageSprite.y= packageBody.position.y 
   drawSprites();
  
 }
 
 function keyPressed() {
-
+ if (keyCode === DOWN_ARROW) {
+	Matter.Body.setStatic(packageBody, false);
+	
+  }
 }
-
 
 
